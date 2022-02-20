@@ -12,3 +12,9 @@ pids
 
 # Build folder
 build
+
+# Keystone admin stuff
+.keystone
+
+# Next stuff
+.next
