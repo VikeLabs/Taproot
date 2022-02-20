@@ -1,2 +1,14 @@
-# Node modules
+# Dependency directory
 node_modules
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Build folder
+build
