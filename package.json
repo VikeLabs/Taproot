@@ -1,0 +1,6 @@
+{
+    "graphql" : {
+        "name" : "my test name",
+        "version" : "1.3"
+    }
+}
