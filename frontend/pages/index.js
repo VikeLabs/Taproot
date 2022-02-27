@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import MyQuery from "./MyQuery";
+import Post from "./post";
 
 import {
   ApolloClient,
@@ -22,10 +22,14 @@ const client = new ApolloClient({
 export default function Home() {
   return (
     <ApolloProvider client={client}>
-      <div>
-        <h1>Test title</h1>
+      <div className='container'>
+        <h2 className='jumbo' style={{marginTop: 2 + 'rem'}}>Taproot</h2>
         <hr/>
-        <MyQuery />
+        <Post />
+
+        {/* Include Boostrap via CDN */}
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
       </div>
     </ApolloProvider>
   )
