@@ -7,6 +7,7 @@ const POST_QUERY = gql`
     posts{
       title
       status
+      id
       author{
         name
       }
@@ -17,8 +18,10 @@ const POST_QUERY = gql`
   }
 `;
 
+const BACKEND_POST_DIR = "/posts"
+
 // Create a function (just a react component?) that executes that query and returns some JSX
-const Post = () => {
+const Post = ({BACKEND_URL}) => {
 
   // Query the back end and store results in those 3 variables
   const { loading, error, data } = useQuery(POST_QUERY);  
@@ -33,7 +36,7 @@ const Post = () => {
     </div>;
   
   // If we reach this point we must have data in the data variable. Use it to output some formatted stuff.
-  return data.posts.map(({ title, content, author}) => (
+  return data.posts.map(({ title, content, author, id}) => (
     <div className='card my-4'>
       <div className='card-body'> {/* These class names are from Bootstrap and used for quick styling */}
         <h4 className='card-title'>{title}</h4>
@@ -43,7 +46,7 @@ const Post = () => {
       </div>
       <div className='card-footer text-muted'>
         <p><small>Author: {author ? author.name : 'null'}</small></p>
-        <p><a href='#' className='btn btn-secondary'>Edit this post</a></p>
+        <p><a href={BACKEND_URL + BACKEND_POST_DIR + "/" + id} className='btn btn-secondary'>Edit this post</a></p>
       </div>
     </div>
   ));
