@@ -7,12 +7,13 @@ type User {
   email: String
   password: PasswordState
   posts(
-    where: PostWhereInput! = {}
-    orderBy: [PostOrderByInput!]! = []
+    where: ContentSnippetWhereInput! = {}
+    orderBy: [ContentSnippetOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
+  ): [ContentSnippet!]
+  postsCount(where: ContentSnippetWhereInput! = {}): Int
+  role: Role
 }
 
 type PasswordState {
@@ -31,7 +32,8 @@ input UserWhereInput {
   id: IDFilter
   name: StringFilter
   email: StringFilter
-  posts: PostManyRelationFilter
+  posts: ContentSnippetManyRelationFilter
+  role: RoleWhereInput
 }
 
 input IDFilter {
@@ -73,10 +75,10 @@ input NestedStringFilter {
   not: NestedStringFilter
 }
 
-input PostManyRelationFilter {
-  every: PostWhereInput
-  some: PostWhereInput
-  none: PostWhereInput
+input ContentSnippetManyRelationFilter {
+  every: ContentSnippetWhereInput
+  some: ContentSnippetWhereInput
+  none: ContentSnippetWhereInput
 }
 
 input UserOrderByInput {
@@ -94,14 +96,21 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForUpdateInput
+  posts: ContentSnippetRelateToManyForUpdateInput
+  role: RoleRelateToOneForUpdateInput
 }
 
-input PostRelateToManyForUpdateInput {
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
+input ContentSnippetRelateToManyForUpdateInput {
+  disconnect: [ContentSnippetWhereUniqueInput!]
+  set: [ContentSnippetWhereUniqueInput!]
+  create: [ContentSnippetCreateInput!]
+  connect: [ContentSnippetWhereUniqueInput!]
+}
+
+input RoleRelateToOneForUpdateInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  disconnect: Boolean
 }
 
 input UserUpdateArgs {
@@ -113,51 +122,49 @@ input UserCreateInput {
   name: String
   email: String
   password: String
-  posts: PostRelateToManyForCreateInput
+  posts: ContentSnippetRelateToManyForCreateInput
+  role: RoleRelateToOneForCreateInput
 }
 
-input PostRelateToManyForCreateInput {
-  create: [PostCreateInput!]
-  connect: [PostWhereUniqueInput!]
+input ContentSnippetRelateToManyForCreateInput {
+  create: [ContentSnippetCreateInput!]
+  connect: [ContentSnippetWhereUniqueInput!]
 }
 
-type Post {
+input RoleRelateToOneForCreateInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+}
+
+type ContentSnippet {
   id: ID!
   title: String
   status: String
-  content: Post_content_Document
+  content: ContentSnippet_content_Document
   publishDate: DateTime
   author: User
-  tags(
-    where: TagWhereInput! = {}
-    orderBy: [TagOrderByInput!]! = []
-    take: Int
-    skip: Int! = 0
-  ): [Tag!]
-  tagsCount(where: TagWhereInput! = {}): Int
 }
 
-type Post_content_Document {
+type ContentSnippet_content_Document {
   document(hydrateRelationships: Boolean! = false): JSON!
 }
 
 scalar DateTime
   @specifiedBy(url: "https://datatracker.ietf.org/doc/html/rfc3339#section-5.6")
 
-input PostWhereUniqueInput {
+input ContentSnippetWhereUniqueInput {
   id: ID
 }
 
-input PostWhereInput {
-  AND: [PostWhereInput!]
-  OR: [PostWhereInput!]
-  NOT: [PostWhereInput!]
+input ContentSnippetWhereInput {
+  AND: [ContentSnippetWhereInput!]
+  OR: [ContentSnippetWhereInput!]
+  NOT: [ContentSnippetWhereInput!]
   id: IDFilter
   title: StringFilter
   status: StringNullableFilter
   publishDate: DateTimeNullableFilter
   author: UserWhereInput
-  tags: TagManyRelationFilter
 }
 
 input StringNullableFilter {
@@ -199,26 +206,19 @@ input DateTimeNullableFilter {
   not: DateTimeNullableFilter
 }
 
-input TagManyRelationFilter {
-  every: TagWhereInput
-  some: TagWhereInput
-  none: TagWhereInput
-}
-
-input PostOrderByInput {
+input ContentSnippetOrderByInput {
   id: OrderDirection
   title: OrderDirection
   status: OrderDirection
   publishDate: OrderDirection
 }
 
-input PostUpdateInput {
+input ContentSnippetUpdateInput {
   title: String
   status: String
   content: JSON
   publishDate: DateTime
   author: UserRelateToOneForUpdateInput
-  tags: TagRelateToManyForUpdateInput
 }
 
 input UserRelateToOneForUpdateInput {
@@ -227,25 +227,17 @@ input UserRelateToOneForUpdateInput {
   disconnect: Boolean
 }
 
-input TagRelateToManyForUpdateInput {
-  disconnect: [TagWhereUniqueInput!]
-  set: [TagWhereUniqueInput!]
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
+input ContentSnippetUpdateArgs {
+  where: ContentSnippetWhereUniqueInput!
+  data: ContentSnippetUpdateInput!
 }
 
-input PostUpdateArgs {
-  where: PostWhereUniqueInput!
-  data: PostUpdateInput!
-}
-
-input PostCreateInput {
+input ContentSnippetCreateInput {
   title: String
   status: String
   content: JSON
   publishDate: DateTime
   author: UserRelateToOneForCreateInput
-  tags: TagRelateToManyForCreateInput
 }
 
 input UserRelateToOneForCreateInput {
@@ -253,54 +245,159 @@ input UserRelateToOneForCreateInput {
   connect: UserWhereUniqueInput
 }
 
-input TagRelateToManyForCreateInput {
-  create: [TagCreateInput!]
-  connect: [TagWhereUniqueInput!]
-}
-
-type Tag {
+type Role {
   id: ID!
   name: String
-  posts(
-    where: PostWhereInput! = {}
-    orderBy: [PostOrderByInput!]! = []
+  users(
+    where: UserWhereInput! = {}
+    orderBy: [UserOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Post!]
-  postsCount(where: PostWhereInput! = {}): Int
+  ): [User!]
+  usersCount(where: UserWhereInput! = {}): Int
+  accessibleLists(
+    where: ListKeyWhereInput! = {}
+    orderBy: [ListKeyOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [ListKey!]
+  accessibleListsCount(where: ListKeyWhereInput! = {}): Int
 }
 
-input TagWhereUniqueInput {
+input RoleWhereUniqueInput {
   id: ID
 }
 
-input TagWhereInput {
-  AND: [TagWhereInput!]
-  OR: [TagWhereInput!]
-  NOT: [TagWhereInput!]
+input RoleWhereInput {
+  AND: [RoleWhereInput!]
+  OR: [RoleWhereInput!]
+  NOT: [RoleWhereInput!]
   id: IDFilter
   name: StringFilter
-  posts: PostManyRelationFilter
+  users: UserManyRelationFilter
+  accessibleLists: ListKeyManyRelationFilter
 }
 
-input TagOrderByInput {
+input UserManyRelationFilter {
+  every: UserWhereInput
+  some: UserWhereInput
+  none: UserWhereInput
+}
+
+input ListKeyManyRelationFilter {
+  every: ListKeyWhereInput
+  some: ListKeyWhereInput
+  none: ListKeyWhereInput
+}
+
+input RoleOrderByInput {
   id: OrderDirection
   name: OrderDirection
 }
 
-input TagUpdateInput {
+input RoleUpdateInput {
   name: String
-  posts: PostRelateToManyForUpdateInput
+  users: UserRelateToManyForUpdateInput
+  accessibleLists: ListKeyRelateToManyForUpdateInput
 }
 
-input TagUpdateArgs {
-  where: TagWhereUniqueInput!
-  data: TagUpdateInput!
+input UserRelateToManyForUpdateInput {
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
-input TagCreateInput {
+input ListKeyRelateToManyForUpdateInput {
+  disconnect: [ListKeyWhereUniqueInput!]
+  set: [ListKeyWhereUniqueInput!]
+  create: [ListKeyCreateInput!]
+  connect: [ListKeyWhereUniqueInput!]
+}
+
+input RoleUpdateArgs {
+  where: RoleWhereUniqueInput!
+  data: RoleUpdateInput!
+}
+
+input RoleCreateInput {
   name: String
-  posts: PostRelateToManyForCreateInput
+  users: UserRelateToManyForCreateInput
+  accessibleLists: ListKeyRelateToManyForCreateInput
+}
+
+input UserRelateToManyForCreateInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+}
+
+input ListKeyRelateToManyForCreateInput {
+  create: [ListKeyCreateInput!]
+  connect: [ListKeyWhereUniqueInput!]
+}
+
+type ListKey {
+  id: ID!
+  key: String
+  roles(
+    where: RoleWhereInput! = {}
+    orderBy: [RoleOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [Role!]
+  rolesCount(where: RoleWhereInput! = {}): Int
+}
+
+input ListKeyWhereUniqueInput {
+  id: ID
+  key: String
+}
+
+input ListKeyWhereInput {
+  AND: [ListKeyWhereInput!]
+  OR: [ListKeyWhereInput!]
+  NOT: [ListKeyWhereInput!]
+  id: IDFilter
+  key: StringFilter
+  roles: RoleManyRelationFilter
+}
+
+input RoleManyRelationFilter {
+  every: RoleWhereInput
+  some: RoleWhereInput
+  none: RoleWhereInput
+}
+
+input ListKeyOrderByInput {
+  id: OrderDirection
+  key: OrderDirection
+}
+
+input ListKeyUpdateInput {
+  key: String
+  roles: RoleRelateToManyForUpdateInput
+}
+
+input RoleRelateToManyForUpdateInput {
+  disconnect: [RoleWhereUniqueInput!]
+  set: [RoleWhereUniqueInput!]
+  create: [RoleCreateInput!]
+  connect: [RoleWhereUniqueInput!]
+}
+
+input ListKeyUpdateArgs {
+  where: ListKeyWhereUniqueInput!
+  data: ListKeyUpdateInput!
+}
+
+input ListKeyCreateInput {
+  key: String
+  roles: RoleRelateToManyForCreateInput
+}
+
+input RoleRelateToManyForCreateInput {
+  create: [RoleCreateInput!]
+  connect: [RoleWhereUniqueInput!]
 }
 
 """
@@ -318,18 +415,32 @@ type Mutation {
   updateUsers(data: [UserUpdateArgs!]!): [User]
   deleteUser(where: UserWhereUniqueInput!): User
   deleteUsers(where: [UserWhereUniqueInput!]!): [User]
-  createPost(data: PostCreateInput!): Post
-  createPosts(data: [PostCreateInput!]!): [Post]
-  updatePost(where: PostWhereUniqueInput!, data: PostUpdateInput!): Post
-  updatePosts(data: [PostUpdateArgs!]!): [Post]
-  deletePost(where: PostWhereUniqueInput!): Post
-  deletePosts(where: [PostWhereUniqueInput!]!): [Post]
-  createTag(data: TagCreateInput!): Tag
-  createTags(data: [TagCreateInput!]!): [Tag]
-  updateTag(where: TagWhereUniqueInput!, data: TagUpdateInput!): Tag
-  updateTags(data: [TagUpdateArgs!]!): [Tag]
-  deleteTag(where: TagWhereUniqueInput!): Tag
-  deleteTags(where: [TagWhereUniqueInput!]!): [Tag]
+  createContentSnippet(data: ContentSnippetCreateInput!): ContentSnippet
+  createContentSnippets(data: [ContentSnippetCreateInput!]!): [ContentSnippet]
+  updateContentSnippet(
+    where: ContentSnippetWhereUniqueInput!
+    data: ContentSnippetUpdateInput!
+  ): ContentSnippet
+  updateContentSnippets(data: [ContentSnippetUpdateArgs!]!): [ContentSnippet]
+  deleteContentSnippet(where: ContentSnippetWhereUniqueInput!): ContentSnippet
+  deleteContentSnippets(
+    where: [ContentSnippetWhereUniqueInput!]!
+  ): [ContentSnippet]
+  createRole(data: RoleCreateInput!): Role
+  createRoles(data: [RoleCreateInput!]!): [Role]
+  updateRole(where: RoleWhereUniqueInput!, data: RoleUpdateInput!): Role
+  updateRoles(data: [RoleUpdateArgs!]!): [Role]
+  deleteRole(where: RoleWhereUniqueInput!): Role
+  deleteRoles(where: [RoleWhereUniqueInput!]!): [Role]
+  createListKey(data: ListKeyCreateInput!): ListKey
+  createListKeys(data: [ListKeyCreateInput!]!): [ListKey]
+  updateListKey(
+    where: ListKeyWhereUniqueInput!
+    data: ListKeyUpdateInput!
+  ): ListKey
+  updateListKeys(data: [ListKeyUpdateArgs!]!): [ListKey]
+  deleteListKey(where: ListKeyWhereUniqueInput!): ListKey
+  deleteListKeys(where: [ListKeyWhereUniqueInput!]!): [ListKey]
   endSession: Boolean!
   authenticateUserWithPassword(
     email: String!
@@ -368,22 +479,30 @@ type Query {
   ): [User!]
   user(where: UserWhereUniqueInput!): User
   usersCount(where: UserWhereInput! = {}): Int
-  posts(
-    where: PostWhereInput! = {}
-    orderBy: [PostOrderByInput!]! = []
+  contentSnippets(
+    where: ContentSnippetWhereInput! = {}
+    orderBy: [ContentSnippetOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Post!]
-  post(where: PostWhereUniqueInput!): Post
-  postsCount(where: PostWhereInput! = {}): Int
-  tags(
-    where: TagWhereInput! = {}
-    orderBy: [TagOrderByInput!]! = []
+  ): [ContentSnippet!]
+  contentSnippet(where: ContentSnippetWhereUniqueInput!): ContentSnippet
+  contentSnippetsCount(where: ContentSnippetWhereInput! = {}): Int
+  roles(
+    where: RoleWhereInput! = {}
+    orderBy: [RoleOrderByInput!]! = []
     take: Int
     skip: Int! = 0
-  ): [Tag!]
-  tag(where: TagWhereUniqueInput!): Tag
-  tagsCount(where: TagWhereInput! = {}): Int
+  ): [Role!]
+  role(where: RoleWhereUniqueInput!): Role
+  rolesCount(where: RoleWhereInput! = {}): Int
+  listKeys(
+    where: ListKeyWhereInput! = {}
+    orderBy: [ListKeyOrderByInput!]! = []
+    take: Int
+    skip: Int! = 0
+  ): [ListKey!]
+  listKey(where: ListKeyWhereUniqueInput!): ListKey
+  listKeysCount(where: ListKeyWhereInput! = {}): Int
   keystone: KeystoneMeta!
   authenticatedItem: AuthenticatedItem
 }

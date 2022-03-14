@@ -12,28 +12,38 @@ generator client {
 }
 
 model User {
-  id       String @id @default(cuid())
-  name     String @default("")
-  email    String @unique @default("")
+  id       String           @id @default(cuid())
+  name     String           @default("")
+  email    String           @unique @default("")
   password String
-  posts    Post[] @relation("Post_author")
+  posts    ContentSnippet[] @relation("ContentSnippet_author")
+  role     Role?            @relation("User_role", fields: [roleId], references: [id])
+  roleId   String?          @map("role")
+
+  @@index([roleId])
 }
 
-model Post {
+model ContentSnippet {
   id          String    @id @default(cuid())
   title       String    @default("")
   status      String?   @default("draft")
   content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   publishDate DateTime?
-  author      User?     @relation("Post_author", fields: [authorId], references: [id])
+  author      User?     @relation("ContentSnippet_author", fields: [authorId], references: [id])
   authorId    String?   @map("author")
-  tags        Tag[]     @relation("Post_tags")
 
   @@index([authorId])
 }
 
-model Tag {
+model Role {
+  id              String    @id @default(cuid())
+  name            String    @default("")
+  users           User[]    @relation("User_role")
+  accessibleLists ListKey[] @relation("ListKey_roles")
+}
+
+model ListKey {
   id    String @id @default(cuid())
-  name  String @default("")
-  posts Post[] @relation("Post_tags")
+  key   String @unique @default("")
+  roles Role[] @relation("ListKey_roles")
 }
