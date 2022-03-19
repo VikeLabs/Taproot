@@ -11,28 +11,32 @@ generator client {
   output   = "node_modules/.prisma/client"
 }
 
-model User {
-  id       String           @id @default(cuid())
-  name     String           @default("")
-  email    String           @unique @default("")
-  password String
-  posts    ContentSnippet[] @relation("ContentSnippet_author")
-  role     Role?            @relation("User_role", fields: [roleId], references: [id])
-  roleId   String?          @map("role")
-
-  @@index([roleId])
-}
-
 model ContentSnippet {
   id          String    @id @default(cuid())
   title       String    @default("")
   status      String?   @default("draft")
   content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
   publishDate DateTime?
-  author      User?     @relation("ContentSnippet_author", fields: [authorId], references: [id])
-  authorId    String?   @map("author")
+  pages       Page[]    @relation("ContentSnippet_pages")
+}
 
-  @@index([authorId])
+model Page {
+  id          String           @id @default(cuid())
+  title       String           @default("")
+  content     String           @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
+  publishDate DateTime?
+  snippets    ContentSnippet[] @relation("ContentSnippet_pages")
+}
+
+model User {
+  id       String  @id @default(cuid())
+  name     String  @default("")
+  email    String  @unique @default("")
+  password String
+  role     Role?   @relation("User_role", fields: [roleId], references: [id])
+  roleId   String? @map("role")
+
+  @@index([roleId])
 }
 
 model Role {

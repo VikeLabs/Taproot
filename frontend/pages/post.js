@@ -1,24 +1,24 @@
 import {gql, useQuery} from '@apollo/client'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
+import { TaprootPageRenderer } from '../util/page-renderer';
 
 // Create a query literal
 const POST_QUERY = gql`
   query {
-    posts{
+    pages{
       title
-      status
-      id
-      author{
-        name
+      snippets{
+        title
       }
       content{
         document
       }
+      id
     }
   }
 `;
 
-const BACKEND_POST_DIR = "/posts"
+const BACKEND_POST_DIR = "/content-snippets"
 
 // Create a function (just a react component?) that executes that query and returns some JSX
 const Post = ({BACKEND_URL}) => {
@@ -36,17 +36,17 @@ const Post = ({BACKEND_URL}) => {
     </div>;
   
   // If we reach this point we must have data in the data variable. Use it to output some formatted stuff.
-  return data.posts.map(({ title, content, author, id}) => (
-    <div className='card my-4'>
+  return data.pages.map(({ title, content, snippets, id}) => (
+    <div className='card my-4' key={id}>
+      {console.log(content.document)}
       <div className='card-body'> {/* These class names are from Bootstrap and used for quick styling */}
         <h4 className='card-title'>{title}</h4>
         <div className='card-text'>
-          <DocumentRenderer document={content.document}/> {/* Use Keystone's document renderer to display the document content */}
+          <TaprootPageRenderer document={content.document}/>
         </div>
       </div>
       <div className='card-footer text-muted'>
-        <p><small>Author: {author ? author.name : 'null'}</small></p>
-        <p><a href={BACKEND_URL + BACKEND_POST_DIR + "/" + id} className='btn btn-secondary'>Edit this post</a></p>
+        <p><a href={BACKEND_URL + BACKEND_POST_DIR + "/" + id} className='btn btn-secondary'>Edit this page</a></p>
       </div>
     </div>
   ));

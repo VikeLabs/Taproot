@@ -18,13 +18,15 @@ A field: The individual bits of data on your list, each with its own type.
 import { Lists } from '.keystone/types';
 
 import { User } from './lists/user';
-import { ContentSnippet } from './lists/content_snippet';
+import { ContentSnippet } from './lists/content-snippet';
 import { Role } from './lists/role';
-import { ListKey } from './lists/list_key';
+import { ListKey } from './lists/list-key';
+import { Page } from './lists/page';
 
 export const lists: Lists = {
-  User,
   ContentSnippet,
+  Page,
+  User,
   Role,
   ListKey
 };

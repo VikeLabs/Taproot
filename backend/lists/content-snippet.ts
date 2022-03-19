@@ -17,7 +17,7 @@ import {
 // custom ones.
 import { document } from '@keystone-6/fields-document';
 
-import { Session, canAccessList } from './list_access';
+import { Session, canAccessList } from './list-access';
 
 export const ContentSnippet = list({
   fields: {
@@ -59,28 +59,19 @@ export const ContentSnippet = list({
 
     // Here is the link from post => author.
     // We've configured its UI display quite a lot to make the experience of editing posts better.
-    author: relationship({
-      ref: 'User.posts',
-      ui: {
-        displayMode: 'cards',
-        cardFields: ['name', 'email'],
-        inlineEdit: { fields: ['name', 'email'] },
-        linkToItem: true,
-        inlineCreate: { fields: ['name', 'email'] },
-      },
-    }),
+    pages: relationship({ ref: 'Page.snippets', many: true }),
   },
 
   // ui: {
-  //   isHidden: ({ session }: { session: Session }) => !canAccessList(session, 'Post'),
+  //   isHidden: ({ session }: { session: Session }) => !canAccessList(session, 'ContentSnippet'),
   // },
 
   access: {
     operation: {
-      create: ({ session }: { session: Session }) => canAccessList(session, 'Post'),
-      update: ({ session }: { session: Session }) => canAccessList(session, 'Post'),
-      delete: ({ session }: { session: Session }) => canAccessList(session, 'Post'),
-      // query: ({ session }: { session: Session }) => canAccessList(session, 'Post'),
+      // create: ({ session }: { session: Session }) => canAccessList(session, 'ContentSnippet'),
+      // update: ({ session }: { session: Session }) => canAccessList(session, 'ContentSnippet'),
+      // delete: ({ session }: { session: Session }) => canAccessList(session, 'ContentSnippet'),
+      // query: ({ session }: { session: Session }) => canAccessList(session, 'ContentSnippet'),
     }
   },
 });

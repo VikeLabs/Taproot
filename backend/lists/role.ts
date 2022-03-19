@@ -5,7 +5,7 @@ import {
   relationship,
 } from '@keystone-6/core/fields';
 
-import { Session, canAccessList } from './list_access';
+import { Session, canAccessList } from './list-access';
 
 export const Role = list({
   fields: {
