@@ -7,8 +7,6 @@ import { list } from '@keystone-6/core';
 // for the full list of fields.
 import {
   text,
-  relationship,
-  timestamp,
   select,
 } from '@keystone-6/core/fields';
 
@@ -16,8 +14,6 @@ import {
 // Keystone aims to have all the base field types, but you can make your own
 // custom ones.
 import { document } from '@keystone-6/fields-document';
-
-import { Session, canAccessList } from './list-access';
 
 export const ContentSnippet = list({
   fields: {
@@ -55,11 +51,6 @@ export const ContentSnippet = list({
       links: true,
       dividers: true,
     }),
-    publishDate: timestamp(),
-
-    // Here is the link from post => author.
-    // We've configured its UI display quite a lot to make the experience of editing posts better.
-    pages: relationship({ ref: 'Page.snippets', many: true }),
   },
 
   // ui: {

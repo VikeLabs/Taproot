@@ -7,11 +7,8 @@ const POST_QUERY = gql`
   query {
     pages{
       title
-      snippets{
-        title
-      }
       content{
-        document
+        document(hydrateRelationships:true)
       }
       id
     }
@@ -38,11 +35,11 @@ const Post = ({BACKEND_URL}) => {
   // If we reach this point we must have data in the data variable. Use it to output some formatted stuff.
   return data.pages.map(({ title, content, snippets, id}) => (
     <div className='card my-4' key={id}>
-      {console.log(content.document)}
+      {/* {console.log(content.document)} */}
       <div className='card-body'> {/* These class names are from Bootstrap and used for quick styling */}
         <h4 className='card-title'>{title}</h4>
         <div className='card-text'>
-          <TaprootPageRenderer document={content.document}/>
+          <DocumentRenderer document={content.document} renderers={TaprootPageRenderer}/>
         </div>
       </div>
       <div className='card-footer text-muted'>

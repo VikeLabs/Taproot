@@ -12,20 +12,16 @@ generator client {
 }
 
 model ContentSnippet {
-  id          String    @id @default(cuid())
-  title       String    @default("")
-  status      String?   @default("draft")
-  content     String    @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publishDate DateTime?
-  pages       Page[]    @relation("ContentSnippet_pages")
+  id      String  @id @default(cuid())
+  title   String  @default("")
+  status  String? @default("draft")
+  content String  @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 }
 
 model Page {
-  id          String           @id @default(cuid())
-  title       String           @default("")
-  content     String           @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
-  publishDate DateTime?
-  snippets    ContentSnippet[] @relation("ContentSnippet_pages")
+  id      String @id @default(cuid())
+  title   String @default("")
+  content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 }
 
 model User {

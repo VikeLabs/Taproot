@@ -1,15 +1,10 @@
-import { list } from '@keystone-6/core';
+import { config, list } from '@keystone-6/core';
 
 import {
   text,
-  relationship,
-  timestamp,
-  select,
 } from '@keystone-6/core/fields';
 
 import { document } from '@keystone-6/fields-document';
-
-import { Session, canAccessList } from './list-access';
 
 export const Page = list({
   fields: {
@@ -25,10 +20,16 @@ export const Page = list({
       ],
       links: true,
       dividers: true,
+      relationships: {
+        mention: {
+          listKey: 'ContentSnippet',
+          selection: 'id title content{document}',
+          label: 'Snippet',
+          kind: 'inline'
+        },
+      },
     }),
-    publishDate: timestamp(),
-    snippets: relationship({ ref: 'ContentSnippet.pages', many: true })
-  },
+    },
 
   // ui: {
   //   isHidden: ({ session }: { session: Session }) => !canAccessList(session, 'Page'),
