@@ -50,3 +50,7 @@ vscode/
 
 # SQLite database
 *.db
+
+# Graphql and prisma auto-generated files
+*.graphql
+*.prisma
