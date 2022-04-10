@@ -24,7 +24,8 @@ export default withAuth(
       url: 'file:./keystone.db'
     },
     server: {
-      cors: { origin: ['http://localhost:3000'], credentials: true }
+      cors: { origin: ['http://localhost:3000'], credentials: true },
+      port: 5000
     },
     lists,
     session,
