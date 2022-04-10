@@ -21,10 +21,10 @@ export const Page = list({
       links: true,
       dividers: true,
       relationships: {
-        mention: {
+        embed: {
           listKey: 'ContentSnippet',
           selection: 'id title content{document}',
-          label: 'Snippet',
+          label: 'Content',
           kind: 'inline'
         },
       },

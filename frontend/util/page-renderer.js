@@ -3,7 +3,7 @@ import { DocumentRenderer } from '@keystone-6/document-renderer';
 export const TaprootPageRenderer = {
   inline: {
     relationship({ relationship, data }) {
-      if (relationship === 'mention') {
+      if (relationship === 'embed') {
         if (data === null || data.data === undefined) {
           return <span>[unknown snippet]</span>;
         } else {
