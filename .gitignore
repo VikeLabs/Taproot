@@ -1,5 +1,8 @@
 # Dependency directory
 node_modules
+/node_modules
+/.pnp
+.pnp.js
 
 # Logs
 logs
@@ -12,9 +15,38 @@ pids
 
 # Build folder
 build
+/build
 
 # Keystone admin stuff
 .keystone
 
 # Next stuff
 .next
+/.next/
+/out/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env
+
+# vercel
+.vercel
+
+# VS code files
+vscode/
+
+# SQLite database
+*.db
