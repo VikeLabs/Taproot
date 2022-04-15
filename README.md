@@ -9,14 +9,5 @@ This repository has separate front end and back end sections. The back end is a 
 As soon as Prisma (which Keystone 6 uses to access databases) fully supports MongoDB then we'll switch to using a Mongo Atlas cloud database.
 
 ### Getting set up
-Start by cloning this repo somewhere on your hard drive.
-
-Then create your own keystone project by following the instructions here: https://keystonejs.com/docs/walkthroughs/getting-started-with-create-keystone-app
-
-You may need to install node.js and yarn before completing the above.
-
-When creating your keystone project put it in a temporary folder somewhere - not the same place as the cloned repo.
-
-When your project has been created, copy node_modules into the main project folder (the one you cloned).
-
-Run yarn dev in the main project folder and you should be up and running.
+Tutorial for Windows 10 here: https://www.youtube.com/watch?v=ByuS1UjsqbU
+Linux should be essentially the same.
