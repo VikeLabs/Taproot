@@ -9,6 +9,10 @@ import { document } from '@keystone-6/fields-document';
 export const Page = list({
   fields: {
     title: text(),
+    slug: text({
+      validation: { isRequired: true },
+      isIndexed: 'unique'
+    }),
     content: document({
       formatting: true,
       layouts: [

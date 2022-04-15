@@ -21,6 +21,7 @@ model ContentSnippet {
 model Page {
   id      String @id @default(cuid())
   title   String @default("")
+  slug    String @unique @default("")
   content String @default("[{\"type\":\"paragraph\",\"children\":[{\"text\":\"\"}]}]")
 }
 

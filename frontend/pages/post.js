@@ -1,4 +1,4 @@
-import {gql, useQuery} from '@apollo/client'
+import { gql, useQuery } from '@apollo/client'
 import { DocumentRenderer } from '@keystone-6/document-renderer';
 import { TaprootPageRenderer } from '../util/page-renderer';
 
@@ -19,6 +19,10 @@ const BACKEND_POST_DIR = "/content-snippets"
 
 // Create a function (just a react component?) that executes that query and returns some JSX
 const Post = ({BACKEND_URL}) => {
+
+  // if(!BACKEND_URL){
+  //   BACKEND_URL = "test.com"
+  // }
 
   // Query the back end and store results in those 3 variables
   const { loading, error, data } = useQuery(POST_QUERY);  

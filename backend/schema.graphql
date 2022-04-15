@@ -123,6 +123,7 @@ input ContentSnippetCreateInput {
 type Page {
   id: ID!
   title: String
+  slug: String
   content: Page_content_Document
 }
 
@@ -132,6 +133,7 @@ type Page_content_Document {
 
 input PageWhereUniqueInput {
   id: ID
+  slug: String
 }
 
 input PageWhereInput {
@@ -140,15 +142,18 @@ input PageWhereInput {
   NOT: [PageWhereInput!]
   id: IDFilter
   title: StringFilter
+  slug: StringFilter
 }
 
 input PageOrderByInput {
   id: OrderDirection
   title: OrderDirection
+  slug: OrderDirection
 }
 
 input PageUpdateInput {
   title: String
+  slug: String
   content: JSON
 }
 
@@ -159,6 +164,7 @@ input PageUpdateArgs {
 
 input PageCreateInput {
   title: String
+  slug: String
   content: JSON
 }
 

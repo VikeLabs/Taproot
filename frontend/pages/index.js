@@ -1,4 +1,3 @@
-import Post from "./post";
 
 import {
   ApolloClient,
@@ -22,7 +21,17 @@ export default function Home() {
       <div className='container'>
         <h2 className='jumbo' style={{marginTop: 2 + 'rem'}}>Taproot</h2>
         <hr/>
-        <Post BACKEND_URL={BACKEND_URL}/>
+
+        <p>
+          Welcome to Taproot Knowledge Base. Here are a few pages to check out.
+        </p>
+
+        <div class="list-group">
+          <a href="#" class="list-group-item list-group-item-action">The current link item</a>
+          <a href="#" class="list-group-item list-group-item-action">A second link item</a>
+          <a href="#" class="list-group-item list-group-item-action">A third link item</a>
+          <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+        </div>
 
         {/* Include Boostrap via CDN */}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
