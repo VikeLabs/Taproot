@@ -11,3 +11,4 @@ As soon as Prisma (which Keystone 6 uses to access databases) fully supports Mon
 ### Getting set up
 Tutorial for Windows 10 here: https://www.youtube.com/watch?v=ByuS1UjsqbU
 Linux is essentially the same. Make sure you have version 16 or higher of nodejs!
+The tutorial takes a while to follow but it's mostly fluff. It should actually be pretty fast to get everything working.
