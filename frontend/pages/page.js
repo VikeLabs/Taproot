@@ -17,43 +17,50 @@ const PAGE_QUERY = gql`
   }
 `;
 
-function getPage(slug){
-  console.log("getting page with slug: ", slug)
-    const { loading, error, data } = useQuery(PAGE_QUERY, {
-      variables: { slug: slug },
-    });
-    if(loading){
-      console.log("Loading: ", loading)
-    }
-    if(error){
-      console.log("Error: ", error)
-    }
-    if(data){
-      console.log("Data found: ", data)
-      return data;
-    }
-}
+// function getPage(slug){
+//   console.log("getting page with slug: ", slug)
+//     const { loading, error, data } = useQuery(PAGE_QUERY, {
+//       variables: { slug: slug },
+//     });
+//     if(loading){
+//       console.log("Loading: ", loading)
+//     }
+//     if(error){
+//       console.log("Error: ", error)
+//     }
+//     if(data){
+//       console.log("Data found: ", data)
+//       return data;
+//     }
+// }
 
 /**
  * Here's the thing. It seems like the code below gets run multiple times and I'm not sure why. 
  * I really need to understand this asynchronous business better.
  */
 
-const Page = ({pid}) => {
-  console.log("Running page() function with pid: ", pid)
-  if(pid){
-    return (
-      <div>
-        <DocumentRenderer document={getPage(pid)?.page.content.document} renderers={TaprootPageRenderer}/>
-      </div>
-    );
+const Page = (slug) => {
+  console.log("Running Page() with slug=", slug)
+  if(slug){
+    const { loading, error, data } = useQuery(PAGE_QUERY, {
+      variables: { slug: slug.slug },
+    });
+    if(data){
+      return (
+        <div>
+          <DocumentRenderer document={data.page.content.document} renderers={TaprootPageRenderer}/>
+        </div>
+      );
+    }
+    if(loading){
+      return (<p>Loading...</p>);
+    }
+    if(error){
+      return (<p>Error loading page {slug}</p>)
+    }
   }
   else{
-    return (
-      <div>
-        Nothing to return
-      </div>
-    );
+    return (<p>For some reason Page() is getting called before slug is defined</p>);
   }
 }
 
