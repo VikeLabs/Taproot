@@ -4,6 +4,8 @@ import {
   InMemoryCache,
   ApolloProvider,
 } from "@apollo/client";
+import { useRouter } from 'next/router'
+import Post from './page.js'
 
 const BACKEND_URL = "http://localhost:5000"
 
@@ -16,6 +18,9 @@ const client = new ApolloClient({
 
 // Export a function that returns our FooBar component wrapped in some JSX which is wrapped in the ApolloProvider component
 export default function Home() {
+  // const router = useRouter()
+  // const { pid } = router.query
+
   return (
     <ApolloProvider client={client}>
       <div className='container'>
@@ -26,11 +31,13 @@ export default function Home() {
           Welcome to Taproot Knowledge Base. Here are a few pages to check out.
         </p>
 
+        {/* <Post pid={pid}/> */}
+
         <div class="list-group">
-          <a href="#" class="list-group-item list-group-item-action">The current link item</a>
-          <a href="#" class="list-group-item list-group-item-action">A second link item</a>
-          <a href="#" class="list-group-item list-group-item-action">A third link item</a>
-          <a href="#" class="list-group-item list-group-item-action">A fourth link item</a>
+          <a href="carrots" class="list-group-item list-group-item-action">The current link item</a>
+          <a href="foo" class="list-group-item list-group-item-action">A second link item</a>
+          <a href="bar" class="list-group-item list-group-item-action">A third link item</a>
+          <a href="gabba" class="list-group-item list-group-item-action">A fourth link item</a>
         </div>
 
         {/* Include Boostrap via CDN */}
