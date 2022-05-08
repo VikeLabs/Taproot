@@ -46,7 +46,7 @@ yarn-error.log*
 .vercel
 
 # VS code files
-vscode/
+.vscode/
 
 # SQLite database
 *.db
