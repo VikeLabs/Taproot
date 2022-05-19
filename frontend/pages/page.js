@@ -18,6 +18,39 @@ const PAGE_QUERY = gql`
 `;
 
 
+const FooRenderer = {
+  inline: {
+    relationship({ relationship, data }) {
+      if (relationship === 'embed') {
+        if (data === null || data.data === undefined) {
+          return <span>[unknown snippet]</span>;
+        } else {
+          return(
+            "Rendering with Foo Renderer"
+            // <div className='card my-4'>
+            //   <div className='card-body'>
+            //     <h6 className='card-title'>{data.data.title}</h6>
+            //     <div className='card-text'>
+            //       <DocumentRenderer document={data.data.content.document}/>
+            //     </div>
+            //   </div>
+            // </div>
+          );
+        }
+      }
+      return null;
+    },
+  },
+};
+
+const MageRenderer = {
+  inline: {
+    bold: ({ children }) => {
+      return <strong>{children}</strong>;
+    },
+  },
+};
+
 const Page = ({slug}) => {
   console.log("Creating Page() component with slug = " + slug)
 
@@ -30,19 +63,20 @@ const Page = ({slug}) => {
     if(data.page){
       return (
         <div>
-          <DocumentRenderer document={data.page.content.document} renderers={TaprootPageRenderer}/>
+          About to render the document using our custom renderer
+          <DocumentRenderer document={data.page.content.document} />
         </div>
       )
     }
     else{
-      return <p>Couldn't find a page with the id: {slug}</p>
+      return <span>Couldn't find a page with the id: {slug}</span>
     }
   }
   if(loading){
-    return (<p>Loading...</p>);
+    return (<span>Loading...</span>);
   }
   if(error){
-    return (<p>Error loading page {slug}</p>)
+    return (<span>Error loading page {slug}</span>)
   }
 }
 

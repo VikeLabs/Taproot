@@ -1,10 +1,9 @@
 import { config, list } from '@keystone-6/core';
-
-import {
-  text,
-} from '@keystone-6/core/fields';
-
+import { componentBlocks } from './component-blocks';
 import { document } from '@keystone-6/fields-document';
+import { text } from '@keystone-6/core/fields';
+
+let path = require('path');
 
 export const Page = list({
   fields: {
@@ -14,6 +13,10 @@ export const Page = list({
       isIndexed: 'unique'
     }),
     content: document({
+      ui: {
+        views: path.join(__dirname, './component-blocks')
+      },
+      componentBlocks,
       formatting: true,
       layouts: [
         [1, 1],
