@@ -1,37 +1,35 @@
 import React from 'react';
 import { jsx } from '@keystone-ui/core';
 import { NotEditable, component, fields } from '@keystone-6/fields-document/component-blocks';
+// import { } from '@keystone-6/core/component-blocks';
 
 // naming the export componentBlocks is important because the Admin UI
 // expects to find the components like on the componentBlocks export
 export const componentBlocks = {
-  quote: component({
-    component: ({ attribution, content }) => {
+  customBlock: component({
+
+    // So I think this part is a React component where the props are the editable bits.
+    component: ({ customStuff }) => {
       return (
-        <div
-          style={{
-            borderLeft: '3px solid #CBD5E0',
-            paddingLeft: 16,
-          }}
-        >
-          <div style={{ fontStyle: 'italic', color: '#4A5568' }}>{content}</div>
-          <div style={{ fontWeight: 'bold', color: '#718096' }}>
-            <NotEditable>— </NotEditable>
-            {attribution}
-          </div>
+        <div>
+          {customStuff}
         </div>
       );
     },
-    label: 'My Foo Component Block',
+    label: 'Custom Block',
     props: {
-      content: fields.child({
-        kind: 'block',
-        placeholder: 'Quote...',
-        formatting: { inlineMarks: 'inherit', softBreaks: 'inherit' },
-        links: 'inherit',
+      customStuff: fields.child({
+        kind: 'inline',
+        placeholder: 'this really is some custom stuff...'
       }),
-      attribution: fields.child({ kind: 'inline', placeholder: 'Attribution...' }),
+      // customStuff: fields.text({
+      //   label: 'text field',
+      //   defaultValue: 'custom text here'
+      // }),
     },
-    chromeless: true,
   }),
+  // customBlock2: fields.text({
+  //   label: 'text field',
+  //   defaultValue: 'custom text here'
+  // })
 };
