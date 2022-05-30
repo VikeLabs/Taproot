@@ -9,9 +9,9 @@
     "postinstall": "keystone postinstall --fix"
   },
   "dependencies": {
-    "@keystone-6/auth": "^1.0.1",
+    "@keystone-6/auth": "^2.0.0",
     "@keystone-6/core": "^1.0.1",
-    "@keystone-6/fields-document": "^1.0.1",
+    "@keystone-6/fields-document": "^2.0.1",
     "next": "^12.1.4",
     "typescript": "^4.5.4"
   },
