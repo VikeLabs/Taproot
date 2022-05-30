@@ -1,35 +1,33 @@
 import React from 'react';
 import { jsx } from '@keystone-ui/core';
-import { NotEditable, component, fields } from '@keystone-6/fields-document/component-blocks';
+import { NotEditable, component, fields, FormField } from '@keystone-6/fields-document/component-blocks';
 // import { } from '@keystone-6/core/component-blocks';
+import { FieldContainer, FieldLabel, TextArea } from "@keystone-ui/fields";
 
-// naming the export componentBlocks is important because the Admin UI
-// expects to find the components like on the componentBlocks export
+// naming the export componentBlocks is important because the Admin UI expects this
 export const componentBlocks = {
-  customBlock: component({
+  customBlock: component({  // Create a component called customBlock
 
-    // So I think this part is a React component where the props are the editable bits.
-    component: ({ customStuff }) => {
+    // Here we define a React component to render in the Admin UI. The props will be different kinds of
+    // editable fields. This customStuff prop is defined below.
+    component: ({ childField, hamtaro }) => {
       return (
         <div>
-          {customStuff}
+          {childField}
+          <hr></hr>
+          {hamtaro}
         </div>
       );
     },
-    label: 'Custom Block',
+    label: 'Custom Block',  // Component will be called 'Custom Block' in the Admin UI
     props: {
-      customStuff: fields.child({
+      // Here we define the prop to be a field of type child with some various arguments. 
+      childField: fields.child({
         kind: 'inline',
-        placeholder: 'this really is some custom stuff...'
+        placeholder: 'this really is some custom stuff...',
       }),
-      // customStuff: fields.text({
-      //   label: 'text field',
-      //   defaultValue: 'custom text here'
-      // }),
+      hamtaro: fields.text({ label: 'foo', defaultValue: 'bar' }),
     },
+    chromeless: false
   }),
-  // customBlock2: fields.text({
-  //   label: 'text field',
-  //   defaultValue: 'custom text here'
-  // })
 };

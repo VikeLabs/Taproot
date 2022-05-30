@@ -50,20 +50,20 @@ export const ContentSnippet = list({
       ],
       links: true,
       dividers: true,
-      relationships: {
-        pageLink: {
-          listKey: 'Page',
-          selection: 'id title content{document}',
-          label: 'Link (Page)',
-          kind: 'inline'
-        },
-        contentLink: {
-          listKey: 'ContentSnippet',
-          selection: 'id title content{document}',
-          label: 'Link (Snippet)',
-          kind: 'inline'
-        },
-      },
+      // relationships: {
+      //   pageLink: {
+      //     listKey: 'Page',
+      //     selection: 'id title content{document}',
+      //     label: 'Link (Page)',
+      //     kind: 'inline'
+      //   },
+      //   contentLink: {
+      //     listKey: 'ContentSnippet',
+      //     selection: 'id title content{document}',
+      //     label: 'Link (Snippet)',
+      //     kind: 'inline'
+      //   },
+      // },
     }),
   },
 

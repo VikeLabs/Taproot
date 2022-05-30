@@ -17,24 +17,17 @@ export const Page = list({
         views: path.join(__dirname, './component-blocks')
       },
       componentBlocks,
-      formatting: true,
-      layouts: [
-        [1, 1],
-        [1, 1, 1],
-        [2, 1],
-        [1, 2],
-        [1, 2, 1],
-      ],
-      links: true,
-      dividers: true,
-      relationships: {
-        embed: {
-          listKey: 'ContentSnippet',
-          selection: 'id title content{document}',
-          label: 'Content',
-          kind: 'inline'
-        },
-      },
+      // formatting: true,
+      // links: true,
+      // dividers: true,
+      // relationships: {
+      //   embed: {
+      //     listKey: 'ContentSnippet',
+      //     selection: 'id title content{document}',
+      //     label: 'Content',
+      //     kind: 'inline'
+      //   },
+      // },
     }),
     },
 
