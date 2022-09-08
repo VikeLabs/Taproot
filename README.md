@@ -1,7 +1,7 @@
 # Taproot Knowledge Base
 
 ### Vision
-To make gardening knowledge more accessible for everyone.
+To build the world's most comprehensive and accessible repository of horticultural knowledge.
 
 ### About this repo
 This repository has separate front end and back end sections. The back end is a temporary setup that uses a Keystone 6 headless CMS and a local SQLite database that provides all the content using a GraphQL API. You have to run a local server in order to use the Keystone admin UI and to access the data from the front end. The front end is a basic React app built with Next. In order to actually use this thing you currently have to start up both the front and and the back end as two different servers.
