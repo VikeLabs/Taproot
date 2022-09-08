@@ -7,7 +7,7 @@ To build the world's most comprehensive and accessible repository of horticultur
 Check out our [about page](/docs/About.md).
 
 ### Design stuff
-Most of our design docs are in `docs/Design/`, but here are some [high level design](/docs/Design/High%20level%20design.md) ideas.
+Here's our [design folder](/docs/Design/).
 
 ### Tech stuff
 - [Getting set up](/docs/Getting%20set%20up.md)
