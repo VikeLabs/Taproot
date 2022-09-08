@@ -3,7 +3,7 @@
 ### Vision
 To build the world's most comprehensive and accessible repository of horticultural knowledge.
 
-### Want to more about the project?
+### Want to know more about the project?
 Check out our [about page](/docs/About.md)
 
 ### Design stuff
