@@ -3,42 +3,32 @@ Welcome to the project! This is a _very cursory_ list of things to help you get 
 In the meantime, [here's a tutorial](https://www.youtube.com/watch?v=ByuS1UjsqbU) that might be of use. The tutorial takes a while to follow but it's mostly fluff. It should actually be pretty fast to get everything working. 
 Note: make sure you have version 16 or higher of nodejs!
 
-Download & install Node.js
-https://nodejs.org/en/
+Download & install [Node.js](https://nodejs.org/en/)   
+Download & install [Git for Windows](https://gitforwindows.org/)   
+[Visual Studio Code](https://code.visualstudio.com/) (totally optional)   
+Clone the [Taproot repository](https://github.com/VikeLabs/Taproot) from GitHub   
+How to [show hidden files](https://support.microsoft.com/en-us/windows/view-hidden-files-and-folders-in-windows-97fbc472-c603-9d90-91d0-1166d1d9f4b5#WindowsVersion=Windows_10) on Windows (optional)   
 
-Download & install Git for Windows
-https://gitforwindows.org/
+Git bash into the Taproot folder and type:   
+`cd frontend`   
+`npm install`
 
-Visual Studio Code (totally optional)
-https://code.visualstudio.com/
-
-Clone the Taproot repository from GitHub
-https://github.com/VikeLabs/Taproot
-
-How to show hidden files on Windows 10 (optional)
-https://support.microsoft.com/en-us/w...
-
-Git bash into the Taproot folder and type:
-cd frontend
-npm install
-
-To verify frontend installation type:
-npm run dev
+To verify frontend installation type:   
+`npm run dev`   
 (ctrl+c to exit server)
 
-Navigate to backend folder from terminal, type:
-cd ..
-cd backend
+Navigate to backend folder from terminal, type:   
+`cd ..`   
+`cd backend`
 
-Download sample_data.db and place it in the backend folder
-https://drive.google.com/file/d/1NQAS...
-Rename it to keystone.db
+Download [`sample_data.db`](https://drive.google.com/file/d/1NQASBA5kUZkBDqP3aD5vpP5jibXLyBjE/view?usp=sharing) and place it in the backend folder   
+Rename it to `keystone.db`
 
-Back in the terminal, type:
-npm install
-npm run postinstall
-npm install next
+Back in the terminal, type:   
+`npm install`    
+`npm run postinstall`   
+`npm install next`   
 
-To verify backend installation type:
-npm run dev
-(ctrl+c to exit server)
+To verify backend installation type:   
+`npm run dev`   
+(ctrl+c to exit server)   
