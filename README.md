@@ -3,14 +3,13 @@
 ### Vision
 To build the world's most comprehensive and accessible repository of horticultural knowledge.
 
-### Want to know more about the project?
-Check out our [about page](/docs/About.md)
+### About Taproot
+- [About page](https://github.com/VikeLabs/Taproot/wiki/About)
 
 ### Design stuff
-Here's our [design folder](/docs/Design/)
+- [High level design](https://github.com/VikeLabs/Taproot/wiki/High-level-design)
 
 ### Tech stuff
-- [Getting set up](/docs/Getting%20set%20up.md)
-- [Tech stack](/docs/Tech%20stack.md)
-- [Development resources](/docs/Resources.md)
-
+- [Getting set up](https://github.com/VikeLabs/Taproot/wiki/Getting-set-up)
+- [Tech stack](https://github.com/VikeLabs/Taproot/wiki/Tech-stack)
+- [Development resources](https://github.com/VikeLabs/Taproot/wiki/Development-resources)
